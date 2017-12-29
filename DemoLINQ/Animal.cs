@@ -18,7 +18,7 @@ namespace DemoLINQ
         public string Name { get; set; } = "";
         public int Age = 0;
 
-        public Animal Live()
+        public Animal Grow()
         {
             Age++;
             Console.WriteLine("{0} grown up.", Name);
