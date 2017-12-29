@@ -18,6 +18,16 @@ namespace DemoLINQ
         public static void CreateAndExecute()
         {
             var animals = new Animal[] { new Animal("dog", 0), new Animal("cat", 1), new Animal("rabbit", 1) };
+            var query = from animal in animals where animal.Age > 0 select animal;
+            foreach (var animal in query)
+            {
+                Console.WriteLine(animal);
+            }
+        }
+
+        public static void DeferredExecution()
+        {
+            var animals = new Animal[] { new Animal("dog", 0), new Animal("cat", 1), new Animal("rabbit", 1) };
             var query = from animal in animals where animal.Live().Age > 0 select animal;
             foreach (var animal in animals)
             {
