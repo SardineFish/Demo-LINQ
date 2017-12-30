@@ -21,7 +21,7 @@ namespace DemoLINQ
         public Animal Grow()
         {
             Age++;
-            Console.WriteLine("{0} grown up.", Name);
+            Console.WriteLine("> {0} grown up.", Name);
             return this;
         }
 

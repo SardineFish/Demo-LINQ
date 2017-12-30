@@ -10,8 +10,7 @@ namespace DemoLINQ
     {
         static void Main(string[] args)
         {
-            ReuseLINQforList();
-
+            ModifyWhileQuery();
             Console.ReadKey();
         }
 
@@ -21,7 +20,8 @@ namespace DemoLINQ
             var animals = new Animal[] { new Animal("dog", 0), new Animal("cat", 1), new Animal("rabbit", 1) };
 
             // Create a LINQ query variable
-            var query = from animal in animals where animal.Age > 0 select animal;
+            //var query = from animal in animals where animal.Age > 0 select animal;
+            var query = animals.Where(animal => animal.Age > 0);
 
             // Execute LINQ query
             foreach (var animal in query)
@@ -33,16 +33,16 @@ namespace DemoLINQ
         public static void DeferredExecution()
         {
             // Create a data source
-            var animals = new Animal[] { new Animal("dog", 0), new Animal("cat", 1), new Animal("rabbit", 1) };
+            var animals = new Animal[] { new Animal("dog", 0), new Animal("cat", 1)};
 
             // Create a LINQ query variable
-            var query = from animal in animals where animal.Grow().Age > 0 select animal;
-
-            // Do a normal query
+            //var query = from animal in animals where animal.Grow().Age > 0 select animal;
+            var query = animals.Where(animal => animal.Grow().Age > 0);
+            /*// Do a normal query
             foreach (var animal in animals)
             {
                 Console.WriteLine(animal);
-            }
+            }*/
 
             // Execute LINQ query
             foreach (var animal in query)
@@ -99,6 +99,21 @@ namespace DemoLINQ
             // Execute LINQ query again
             foreach (var animal in query)
             {
+                Console.WriteLine(animal);
+            }
+        }
+
+        public static void ModifyWhileQuery()
+        {// Data source
+            var animals = new List<Animal>(new Animal[] { new Animal("dog", 0), new Animal("cat", 1), new Animal("rabbit", 1) });
+
+            // LINQ query variable
+            var query = from animal in animals where animal.Age > 0 select animal;
+
+            // Execute LINQ query
+            foreach (var animal in query)
+            {
+                animals.RemoveAt(2);
                 Console.WriteLine(animal);
             }
         }
